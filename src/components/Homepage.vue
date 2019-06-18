@@ -1,9 +1,9 @@
 <template>
   <div class="row" id="search-row">
-    <div class="offset-md-2 col-md-8">
+    <div class="offset-md-1 col-md-10 offset-lg-2 col-lg-8">
       <div class="jumbotron">
         <form>
-          <h1 class="display-6 text-center">Zwiedzaj odwiedzane miasta jak nigdy wcześniej!</h1>
+          <h1 class="text-center">Zwiedzaj odwiedzane miasta jak nigdy wcześniej!</h1>
 
           <div class="form-group">
             <div class="input-group">
@@ -37,8 +37,16 @@ export default {
 <style scoped lang="scss">
 @import '@/styles/colors.scss';
 
-.row#search-row {
-  background-color: $skyBaseColor;
+@media (max-width: 768px) {
+  .row#search-row {
+    border-bottom: 2px solid $skyBaseColor;
+  }
+}
+
+@media (min-width: 768px) {
+  .row#search-row {
+    background-color: $skyBaseColor;
+  }
 }
 
 .jumbotron {
@@ -48,8 +56,15 @@ export default {
 
   h1 {
     color: $skyBaseColor;
-    font-size: 2.4rem;
     margin-bottom: 32px;
+
+    @media (max-width: 768px) {
+      font-size: 16px;
+    }
+
+    @media (min-width: 768px) and (max-width: 992px) {
+      font-size: 22px;
+    }
   }
 }
 
@@ -62,12 +77,30 @@ form {
         border: 1px solid $skyBaseColor;
         border-top-left-radius: 0.25rem;
         border-bottom-left-radius: 0.25rem;
+        font-size: 30px;
+
+        @media (max-width: 768px) {
+          font-size: 18px;
+        }
+
+        @media (min-width: 768px) and (max-width: 992px) {
+          font-size: 24px;
+        }
       }
 
       div.input-group-append button {
         background-color: $skyBaseColor;
         border-color: $skyBaseColor;
         color: #ffffff;
+        font-size: 30px;
+
+        @media (max-width: 768px) {
+          font-size: 18px;
+        }
+
+        @media (min-width: 768px) and (max-width: 992px) {
+          font-size: 24px;
+        }
       }
     }
 
