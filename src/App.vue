@@ -1,6 +1,13 @@
 <template>
-  <div id="app">
-    <img src="./assets/logo.png">
+  <div id="app"  class="container-fluid">
+    <div class="row">
+      <div class="col">
+        <nav class="navbar navbar-dark bg-transparent">
+          <router-link class="navbar-brand" to="/"><font-awesome-icon icon="home" /></router-link>
+        </nav>
+      </div>
+    </div>
+
     <router-view/>
   </div>
 </template>
@@ -11,13 +18,27 @@ export default {
 }
 </script>
 
-<style>
+<style lang="scss">
+@import '@/styles/colors.scss';
+
 #app {
   font-family: 'Avenir', Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
+}
+
+.navbar-dark .navbar-brand {
+  color: #555555;
+  border-bottom: 3px solid transparent;
+
+  &:hover, &:focus {
+    color: #111111;
+  }
+
+  &:not(:first-child) {
+    &:hover, &:focus {
+      border-color: $groundBaseColor;
+    }
+  }
 }
 </style>
