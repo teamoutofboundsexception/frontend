@@ -4,7 +4,7 @@
       <div class="col">
         <b-navbar toggleable="md" class="bg-transparent">
           <b-navbar-brand>
-            <router-link to="/">
+            <router-link v-bind:to="'/' + $i18n.locale">
               <font-awesome-icon icon="home" />
             </router-link>
           </b-navbar-brand>
@@ -13,7 +13,7 @@
 
           <b-collapse id="nav-collapse" is-nav>
             <b-navbar-nav>
-              <b-nav-item class="nav-link text-uppercase" to="/featured">{{ $t('navbar.featured') }}</b-nav-item>
+              <b-nav-item class="nav-link text-uppercase" v-bind:to="'/' + $i18n.locale + '/featured'">{{ $t('navbar.featured') }}</b-nav-item>
             </b-navbar-nav>
 
             <b-navbar-nav class="ml-auto">
@@ -33,14 +33,6 @@
 
 <script>
 export default {
-  beforeMount () {
-    const browserLanguage = window.navigator.language
-
-    if (this.$i18n.availableLocales.filter(language => language === browserLanguage).length > 0) {
-      this.$i18n.locale = browserLanguage
-    }
-  },
-
   name: 'App'
 }
 </script>
