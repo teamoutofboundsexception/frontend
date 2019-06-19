@@ -10,10 +10,10 @@
               <div class="input-group">
                 <label class="text-hide" for="query">Wyszukaj miasta</label>
                 <input class="form-control" type="text" id="query" name="query" placeholder="Miasto"
-                       aria-label="Search">
+                       aria-label="Search" v-model="query">
 
                 <div class="input-group-append">
-                  <button class="input-group-text" type="submit">
+                  <button class="input-group-text" type="submit" v-on:click.stop.prevent="submit()">
                     <font-awesome-icon icon="search"/>
                   </button>
                 </div>
@@ -57,9 +57,21 @@ export default {
     this.$store.dispatch('places/getFeatured')
   },
 
-  methods: mapActions('places', [
-    'getFeatured'
-  ])
+  data () {
+    return {
+      query: null
+    }
+  },
+
+  methods: {
+    ...mapActions(
+      'places', [
+        'getFeatured'
+      ]),
+    submit () {
+      this.$router.push('/search?query=' + this.query)
+    }
+  }
 }
 </script>
 
