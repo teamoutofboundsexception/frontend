@@ -4,13 +4,14 @@
       <div class="offset-md-1 col-md-10 offset-lg-2 col-lg-8">
         <div class="jumbotron">
           <form action="/search">
-            <h1 class="text-center">Zwiedzaj odwiedzane miasta jak nigdy wcześniej!</h1>
+            <h1 class="text-center">{{ $t('homepage.search.header') }}</h1>
 
             <div class="form-group">
               <div class="input-group">
-                <label class="text-hide" for="query">Wyszukaj miasta</label>
-                <input class="form-control" type="text" id="query" name="query" placeholder="Miasto"
-                       aria-label="Search" v-model="query">
+                <label class="text-hide" for="query">{{ $t('homepage.search.label') }}</label>
+                <input class="form-control" type="text" id="query" name="query"
+                       v-bind:aria-label="$t('homepage.search.label')"
+                       v-bind:placeholder="$t('homepage.search.placeholder')" v-model="query">
 
                 <div class="input-group-append">
                   <button class="input-group-text" type="submit" v-on:click.stop.prevent="submit()">
@@ -25,11 +26,11 @@
     </div>
 
     <div class="row" id="featured-row" v-if="(featured === undefined) || (featured.length === 4)">
-      <h2 class="col-12 text-center">Proponowane Miejsca</h2>
+      <h2 class="col-12 text-center">{{ $t('homepage.featured.header') }}</h2>
 
       <div class="col text-center" v-if="featured === undefined">
         <div class="spinner-border" role="status">
-          <span class="sr-only">Loading...</span>
+          <span class="sr-only">{{ $t('homepage.featured.loading') }}</span>
         </div>
       </div>
 
