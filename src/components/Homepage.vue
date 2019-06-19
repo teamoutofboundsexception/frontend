@@ -47,42 +47,18 @@
 </template>
 
 <script>
-import axios from 'axios'
 import { mapState, mapActions } from 'vuex'
 
 export default {
-  beforeMount () {
-    if (navigator.geolocation) {
-      new Promise(resolve => navigator.geolocation.getCurrentPosition(resolve)).then(position => {
-        const zoom = 16 // major streets
-
-        const { coords } = position
-
-        const { latitude, longitude } = coords
-        const url = 'https://nominatim.openstreetmap.org/reverse?lat=' + latitude + '&lon=' + longitude +
-          '&zoom=' + zoom + '&format=jsonv2'
-
-        return axios.get(url)
-      }).then(response => {
-        const { data } = response
-        const { address } = data
-
-        if (address.hasOwnProperty('city')) {
-          this.query = address.city + ', ' + address.country
-        } else if (address.hasOwnProperty('village')) {
-          this.query = address.village + ', ' + address.country
-        } else {
-          this.query = address.country
-        }
-      })
-    }
-  },
-
   computed: mapState({
+    address: state => state.location.address,
+    coordinates: state => state.location.coordinates,
     featured: state => state.places.featured
   }),
 
   created () {
+    this.$store.dispatch('location/getLocation')
+
     this.$store.dispatch('places/getFeatured')
   },
 
@@ -94,11 +70,31 @@ export default {
 
   methods: {
     ...mapActions(
+      'location', [
+        'getLocation'
+      ]),
+
+    ...mapActions(
       'places', [
         'getFeatured'
       ]),
+
     submit () {
-      this.$router.push('/search?query=' + this.query)
+      this.$router.push('/' + this.$i18n.locale + '/search?query=' + this.query)
+    }
+  },
+
+  watch: {
+    address: function (address) {
+      if (address) {
+        if (address.hasOwnProperty('city')) {
+          this.query = address.city + ', ' + address.country
+        } else if (address.hasOwnProperty('village')) {
+          this.query = address.village + ', ' + address.country
+        } else {
+          this.query = address.country
+        }
+      }
     }
   }
 }
