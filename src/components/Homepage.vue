@@ -34,12 +34,16 @@
         </div>
       </div>
 
-      <div class="card col-xs-4 col-sm-6 col-md-3 col-lg-2 border-0" v-bind:class="{ 'offset-lg-2': index === 0 }"
-           v-bind:key="place.title" v-for="(place, index) in featured">
-        <img v-bind:alt="place.image.text" class="card-img-top" v-bind:src="place.image.url">
-        <div class="card-body">
-          <h4 class="card-title">{{ place.title }} {{ index }}</h4>
-          <p class="card-text">{{ place.text }}</p>
+      <div class="card-group col offset-lg-2 col-lg-8">
+        <div class="card border-0" v-bind:key="index" v-for="(place, index) in featured">
+          <img v-bind:alt="place.image.text" class="card-img-top" v-bind:src="place.image.url">
+          <div class="card-body">
+            <h4 class="card-title text-center">{{ place.title }}</h4>
+            <p class="card-text" v-if="place.hasOwnProperty('rating')">
+              <small class="text-muted"><font-awesome-icon icon="star" /> {{ place.rating }}</small>
+            </p>
+            <p class="card-text text-justify">{{ place.hasOwnProperty("text") ? place.text : '' }}</p>
+          </div>
         </div>
       </div>
     </div>
@@ -135,6 +139,12 @@ export default {
 
     .card {
       cursor: default;
+      padding: 0 8px;
+
+      img {
+        height: 192px;
+        object-fit: cover;
+      }
     }
   }
 }

@@ -7,6 +7,10 @@ export default {
         offset: 0,
         limit: 4
       }
+    }).then(response => {
+      const { data } = response
+
+      return data
     })
   }
 }
