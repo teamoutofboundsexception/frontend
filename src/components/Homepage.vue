@@ -2,13 +2,13 @@
   <div class="row" id="search-row">
     <div class="offset-md-1 col-md-10 offset-lg-2 col-lg-8">
       <div class="jumbotron">
-        <form>
+        <form action="/search">
           <h1 class="text-center">Zwiedzaj odwiedzane miasta jak nigdy wcześniej!</h1>
 
           <div class="form-group">
             <div class="input-group">
-              <label class="text-hide" for="search">Wyszukaj miasta</label>
-              <input class="form-control amber-border" type="text" id="search" name="search" placeholder="Miasto"
+              <label class="text-hide" for="query">Wyszukaj miasta</label>
+              <input class="form-control" type="text" id="query" name="query" placeholder="Miasto"
                      aria-label="Search">
 
               <div class="input-group-append">
@@ -37,15 +37,18 @@ export default {
 <style scoped lang="scss">
 @import '@/styles/colors.scss';
 
-@media (max-width: 768px) {
-  .row#search-row {
+.row#search-row {
+  @media (max-width: 768px) {
     border-bottom: 2px solid $skyBaseColor;
   }
-}
 
-@media (min-width: 768px) {
-  .row#search-row {
+  @media (min-width: 768px) {
     background-color: $skyBaseColor;
+    background-image: url('../assets/homepage-background.jpg');
+    background-position: bottom center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-attachment: fixed;
   }
 }
 
