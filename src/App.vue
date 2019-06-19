@@ -2,22 +2,28 @@
   <div id="app"  class="container-fluid">
     <div class="row" id="navbar-row">
       <div class="col">
-        <nav class="navbar navbar-expand-md navbar-dark bg-transparent">
-          <router-link class="navbar-brand" to="/"><font-awesome-icon icon="home" /></router-link>
+        <b-navbar toggleable="md" class="bg-transparent">
+          <b-navbar-brand>
+            <router-link to="/">
+              <font-awesome-icon icon="home" />
+            </router-link>
+          </b-navbar-brand>
 
-          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
-                  aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-            <font-awesome-icon icon="bars" />
-          </button>
+          <b-navbar-toggle target="nav-collapse"></b-navbar-toggle>
 
-          <div class="collapse navbar-collapse" id="navbarNav">
-            <ul class="navbar-nav">
-              <li class="nav-item">
-                <router-link class="text-uppercase" to="/featured">{{ $t('navbar.featured') }}</router-link>
-              </li>
-            </ul>
-          </div>
-        </nav>
+          <b-collapse id="nav-collapse" is-nav>
+            <b-navbar-nav>
+              <b-nav-item class="nav-link text-uppercase" to="/featured">{{ $t('navbar.featured') }}</b-nav-item>
+            </b-navbar-nav>
+
+            <b-navbar-nav class="ml-auto">
+              <b-nav-item-dropdown v-bind:text="$t('navbar.language')" right>
+                <b-dropdown-item class="text-uppercase" v-for="language in $i18n.availableLocales"
+                                 v-bind:key="language" v-bind:to="'/' + language">{{ language }}</b-dropdown-item>
+              </b-nav-item-dropdown>
+            </b-navbar-nav>
+          </b-collapse>
+        </b-navbar>
       </div>
     </div>
 
@@ -54,29 +60,24 @@ export default {
   }
 }
 
-.navbar-dark {
-  a, .navbar-brand, .navbar-toggler {
-    color: #555555;
+.navbar-brand a, .nav-item a.nav-link, .navbar-toggler {
+  color: #555555;
 
-    &:hover, &:focus {
-      color: #111111;
-    }
+  &:hover, &:focus {
+    color: #111111;
   }
+}
 
-  a, .navbar-brand {
-    border-bottom: 3px solid transparent;
-    transition: border-bottom-color .2s ease-in, color .2s ease-in;
+.nav-item a.nav-link {
+  border-bottom: 3px solid transparent;
+  transition: border-bottom-color .2s ease-in, color .2s ease-in;
+
+  &.router-link-active, &:hover, &:focus {
+    border-color: $groundBaseColor;
   }
+}
 
-  a:not(.navbar-brand) {
-    margin: 0 8px;
-    padding-bottom: 0.3125rem;
-    padding-top: 0.3125rem;
-    text-decoration: none;
-
-    &:hover, &:focus, &.router-link-active {
-      border-color: $groundBaseColor;
-    }
-  }
+.navbar-toggler {
+  border: none;
 }
 </style>

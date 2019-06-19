@@ -20,7 +20,8 @@ export default new VueI18n({
         }
       },
       navbar: {
-        featured: 'Featured Places'
+        featured: 'Featured Places',
+        language: 'Language'
       }
     },
     pl: {
@@ -36,7 +37,8 @@ export default new VueI18n({
         }
       },
       navbar: {
-        featured: 'Proponowane Miejsca'
+        featured: 'Proponowane Miejsca',
+        language: 'Język'
       }
     }
   }
