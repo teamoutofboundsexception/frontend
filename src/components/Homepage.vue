@@ -24,10 +24,10 @@
       </div>
     </div>
 
-    <div class="row" id="featured-row">
+    <div class="row" id="featured-row" v-if="(featured === undefined) || (featured.length === 4)">
       <h2 class="col-12 text-center">Proponowane Miejsca</h2>
 
-      <div class="col text-center" v-if="featured.length === 0">
+      <div class="col text-center" v-if="featured === undefined">
         <div class="spinner-border" role="status">
           <span class="sr-only">Loading...</span>
         </div>

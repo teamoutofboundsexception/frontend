@@ -1,7 +1,7 @@
 import places from '../../api/places'
 
 const state = {
-  featured: []
+  featured: undefined
 }
 
 const getters = {}
@@ -9,6 +9,7 @@ const getters = {}
 const actions = {
   getFeatured ({ commit }) {
     places.getFeatured().then(featured => commit('setFeatured', featured))
+      .catch(() => commit('setFeatured', []))
   }
 }
 
