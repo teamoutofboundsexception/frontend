@@ -52,121 +52,139 @@ export default {
   computed: mapState({
     featured: state => state.places.featured
   }),
-  methods: mapActions('places', [
-    'getFeatured'
-  ]),
+
   created () {
     this.$store.dispatch('places/getFeatured')
-  }
+  },
+
+  methods: mapActions('places', [
+    'getFeatured'
+  ])
 }
 </script>
 
-
-
-
 <style scoped lang="scss">
-  @import '@/styles/colors.scss';
+@import '@/styles/colors.scss';
 
-  .row {
-    &#search-row {
-      @media (max-width: 768px) {
-        border-bottom: 2px solid $skyBaseColor;
-      }
-
-      @media (min-width: 768px) {
-        background-color: $skyBaseColor;
-        background-image: url('../assets/homepage-background.jpg');
-        background-position: bottom center;
-        background-repeat: no-repeat;
-        background-size: cover;
-        background-attachment: fixed;
-      }
+.row {
+  &#search-row {
+    @media (max-width: 768px) {
+      border-bottom: 2px solid $skyBaseColor;
     }
 
-    &#featured-row {
-      margin: 32px 0;
-
-      h2 {
-        color: #333333;
-        margin-bottom: 16px;
-      }
-
-      .spinner-border {
-        height: 4rem;
-        margin: 32px;
-        width: 4rem;
-      }
+    @media (min-width: 768px) {
+      background-color: $skyBaseColor;
+      background-image: url('../assets/homepage-background.jpg');
+      background-position: bottom center;
+      background-repeat: no-repeat;
+      background-size: cover;
+      background-attachment: fixed;
     }
   }
 
-  .jumbotron {
-    background-color: #ffffff;
-    border-radius: 0;
+  &#featured-row {
     margin: 32px 0;
 
-    h1 {
-      color: $skyBaseColor;
-      margin-bottom: 32px;
+    h2 {
+      color: #333333;
+      margin-bottom: 16px;
+    }
 
-      @media (max-width: 768px) {
-        font-size: 16px;
-      }
+    .spinner-border {
+      height: 4rem;
+      margin: 32px;
+      width: 4rem;
+    }
 
-      @media (min-width: 768px) and (max-width: 992px) {
-        font-size: 22px;
-      }
+    .card {
+      cursor: default;
     }
   }
+}
 
-  form {
-    padding: 32px;
+.jumbotron {
+  background-color: #ffffff;
+  border-radius: 0;
+  margin: 32px 0;
 
-    div.form-group {
-      div.input-group {
-        input.form-control {
-          border: 1px solid $skyBaseColor;
-          border-top-left-radius: 0.25rem;
-          border-bottom-left-radius: 0.25rem;
-          -webkit-box-shadow: none;
-          -moz-box-shadow: none;
-          box-shadow: none;
-          color: #555555;
-          font-size: 30px;
+  h1 {
+    color: $skyBaseColor;
+    margin-bottom: 32px;
 
-          @media (max-width: 768px) {
-            font-size: 18px;
-          }
+    @media (max-width: 768px) {
+      font-size: 16px;
+    }
 
-          @media (min-width: 768px) and (max-width: 992px) {
-            font-size: 24px;
-          }
+    @media (min-width: 768px) and (max-width: 992px) {
+      font-size: 22px;
+    }
+  }
+}
+
+form {
+  padding: 32px;
+
+  div.form-group {
+    div.input-group {
+      input.form-control {
+        border-bottom-left-radius: 0.25rem;
+        border-color: $skyBaseColor;
+        border-style: solid;
+        border-top-left-radius: 0.25rem;
+        border-width: 1px 0 1px 1px;
+        -webkit-box-shadow: none;
+        -moz-box-shadow: none;
+        box-shadow: none;
+        color: #555555;
+        font-size: 30px;
+
+        @media (max-width: 768px) {
+          font-size: 18px;
+        }
+
+        @media (min-width: 768px) and (max-width: 992px) {
+          font-size: 24px;
+        }
+
+        &:hover, &:focus {
+          border-width: 2px 0 2px 2px;
+          color: #333333;
+          padding: calc(0.375rem - 1px) calc(0.75rem - 1px);
+        }
+      }
+
+      div.input-group-append button {
+        background-color: $skyBaseColor;
+        border-color: $skyBaseColor;
+        color: #ffffff;
+        font-size: 30px;
+
+        &:hover, &:focus {
+          font-size: 34px;
+          padding: calc(0.375rem - 2px) calc(0.75rem - 2px);
+        }
+
+        @media (max-width: 768px) {
+          font-size: 18px;
 
           &:hover, &:focus {
-            border-width: 2px;
-            color: #333333;
-            padding: calc(0.375rem - 1px) calc(0.75rem - 1px);
+            font-size: 22px;
           }
         }
 
-        div.input-group-append button {
-          background-color: $skyBaseColor;
-          border-color: $skyBaseColor;
-          color: #ffffff;
-          font-size: 30px;
+        @media (min-width: 768px) and (max-width: 992px) {
+          font-size: 24px;
 
-          @media (max-width: 768px) {
-            font-size: 18px;
-          }
-
-          @media (min-width: 768px) and (max-width: 992px) {
-            font-size: 24px;
+          &:hover, &:focus {
+            font-size: 28px;
           }
         }
-      }
-
-      &:last-child {
-        margin-bottom: 0;
       }
     }
+
+    &:last-child {
+      margin-bottom: 0;
+    }
   }
+}
 </style>
