@@ -10,7 +10,7 @@ export default new VueI18n({
     en: {
       homepage: {
         featured: {
-          header: 'Featured Places',
+          header: 'Featured Cities',
           loading: 'Loading'
         },
         search: {
@@ -20,14 +20,20 @@ export default new VueI18n({
         }
       },
       navbar: {
-        featured: 'Featured Places',
+        featured: 'Featured Cities',
         language: 'Language'
+      },
+      search: {
+        search: {
+          label: 'Search city',
+          placeholder: 'City'
+        }
       }
     },
     pl: {
       homepage: {
         featured: {
-          header: 'Proponowane Miejsca',
+          header: 'Proponowane Miasta',
           loading: 'Ładowanie'
         },
         search: {
@@ -37,8 +43,14 @@ export default new VueI18n({
         }
       },
       navbar: {
-        featured: 'Proponowane Miejsca',
+        featured: 'Proponowane Miasta',
         language: 'Język'
+      },
+      search: {
+        search: {
+          label: 'Wyszukaj miasto',
+          placeholder: 'Miasto'
+        }
       }
     }
   }

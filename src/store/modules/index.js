@@ -1,2 +1,2 @@
+export {default as cities} from './cities'
 export {default as location} from './location'
-export {default as places} from './places'

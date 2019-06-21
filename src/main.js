@@ -5,6 +5,7 @@ import App from './App'
 import './bootstrap'
 import './fontawesome'
 import i18n from './i18n'
+import './openlayers'
 import router from './router'
 import store from './store'
 

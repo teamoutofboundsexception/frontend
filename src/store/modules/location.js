@@ -42,6 +42,9 @@ const mutations = {
   },
 
   setCoordinates (state, coordinates) {
+    coordinates.latitude = parseFloat(coordinates.latitude)
+    coordinates.longitude = parseFloat(coordinates.longitude)
+
     state.coordinates = coordinates
   }
 }
