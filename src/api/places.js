@@ -3,7 +3,12 @@ import axios from 'axios'
 export default {
   getRelated (params = {}) {
     return axios.get(process.env.API_ENDPOINT + '/places/related', {
-      data: params
+      data: params,
+      transformRequest: [function (data, headers) {
+        data = data.data
+
+        return data
+      }]
     }).then(response => {
       const { data } = response
 
@@ -12,9 +17,7 @@ export default {
   },
 
   getTrip (params = {}) {
-    return axios.get(process.env.API_ENDPOINT + '/trip/advise', {
-      data: params
-    }).then(response => {
+    return axios.post(process.env.API_ENDPOINT + '/trip/advise', params).then(response => {
       const { data } = response
 
       return data

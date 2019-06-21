@@ -107,7 +107,7 @@ export default {
     }
 
     places.getTrip({
-      actualPlaceName: query.query,
+      query: query.query,
       time: query.time,
       longitude: query.lon,
       latitude: query.lat
