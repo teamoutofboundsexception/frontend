@@ -27,18 +27,32 @@
     </div>
 
     <div class="row" id="results-row">
-      <div class="col-xs-12 offset-lg-2 col-lg-8" v-bind:key="index" v-for="(result, index) in results">
+      <div class="col text-center" v-if="results === null">
+        <div class="spinner-border" role="status">
+          <span class="sr-only">Ładowanie</span>
+        </div>
+      </div>
+
+      <div class="col text-center" v-if="(results !== null) && (results.length === 0)">Brak wyników :(</div>
+
+      <div class="col-xs-12 offset-lg-2 col-lg-8" v-bind:key="index" v-for="(result, index) in results" v-if="(results !== null) && (results.length > 0)">
         <div class="card-deck">
           <div class="card border-0" v-bind:key="index" v-for="(place, index) in result">
-            <img class="card-img-top" v-bind:src="place.image" alt="Card image cap">
+            <img class="card-img-top" v-bind:src="!!place.image ? place.image : 'https://via.placeholder.com/320x320.png?text=Grafika%20niedost%C4%99pna'" alt="Card image cap">
             <div class="card-body">
               <h5 class="card-title">
                 {{ place.title }}
+
+                <span class="text-muted" v-if="!!place.blindFriendly || !!place.wheelChairFriendly">
+                  <font-awesome-icon icon="blind" v-if="!!place.blindFriendly" />
+                  <font-awesome-icon icon="wheelchair" v-if="!!place.wheelChairFriendly" />
+                </span>
+
                 <div v-if="!!place.rating">
                   <small class="text-muted"><font-awesome-icon icon="star"/> {{ place.rating }}</small>
                 </div>
                 <div v-if="!!place.time">
-                  <small class="text-muted">Średnia długość wizyty {{ place.time }}</small>
+                  <small class="text-muted">Średnia długość wizyty: {{ place.time }}</small>
                 </div>
               </h5>
               <p class="card-text">{{ place.text }}</p>
@@ -97,8 +111,11 @@ export default {
       time: query.time,
       longitude: query.lon,
       latitude: query.lat
+    }).catch(() => {
+      this.results = []
     }).then(data => {
-      this.results = data
+      // eslint-disable-next-line
+      this.results = !!data ? data : []
 
       this.results.forEach(result => result.forEach(place => {
         place.coordinates = [place.longitude, place.latitude]
@@ -127,7 +144,7 @@ export default {
       coordinates: [],
       query: '',
       time: '02:30',
-      results: []
+      results: null
     }
   },
 
@@ -179,11 +196,20 @@ div#results-row {
 
   div.card-deck {
     div.card {
-      max-width: 512px;
       min-width: 256px;
 
       &:first-child:last-child {
         margin: auto;
+        max-width: 512px;
+      }
+
+      .card-title {
+        position: relative;
+
+        > span.text-muted {
+          position: absolute;
+          right: 0;
+        }
       }
 
       img {
