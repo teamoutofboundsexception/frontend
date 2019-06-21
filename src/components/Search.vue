@@ -38,7 +38,7 @@
       <div class="col-xs-12 offset-lg-2 col-lg-8" v-bind:key="index" v-for="(result, index) in results" v-if="(results !== null) && (results.length > 0)">
         <div class="card-deck">
           <div class="card border-0" v-bind:key="index" v-for="(place, index) in result">
-            <img class="card-img-top" v-bind:src="!!place.image ? place.image : 'https://via.placeholder.com/320x320.png?text=Grafika%20niedost%C4%99pna'" alt="Card image cap">
+            <img class="card-img-top" v-bind:src="!!place.image ? place.image : 'https://via.placeholder.com/512x256.png?text=Grafika%20niedost%C4%99pna'" alt="Card image cap">
             <div class="card-body">
               <h5 class="card-title">
                 {{ place.title }}
