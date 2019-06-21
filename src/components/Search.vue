@@ -52,7 +52,7 @@
                   <small class="text-muted"><font-awesome-icon icon="star"/> {{ place.rating }}</small>
                 </div>
                 <div v-if="!!place.time">
-                  <small class="text-muted">Średnia długość wizyty: {{ place.time }}</small>
+                  <small class="text-muted">Średnia długość wizyty: {{ place.time.split(':').join(' godz. ') + ' min.' }}</small>
                 </div>
               </h5>
               <p class="card-text">{{ place.text }}</p>
@@ -61,11 +61,11 @@
         </div>
 
         <div v-if="result.map(place => place.coordinates).filter(coordinates => !!coordinates && (coordinates.length === 2)).length > 0">
-          <b-button v-b-toggle="'map-' + index" variant="light">Pokaż</b-button>
+          <b-button v-b-toggle="'map-' + index" variant="light">Pokaż</b-button> <!-- v-bind:pressed.sync="result.show" --> <!-- {{ result.show ? 'Ukryj' : 'Pokaż' }} -->
 
           <b-collapse v-bind:id="'map-' + index" visible>
             <vl-map v-bind:load-tiles-while-animating="true" v-bind:load-tiles-while-interacting="true" data-projection="EPSG:4326">
-              <vl-view v-bind:min-zoom="12" v-bind:zoom="13" v-bind:max-zoom="18" v-bind:center.sync="results[0].center"></vl-view> <!-- v-bind:zoom.sync="map.zoom" v-bind:rotation.sync="map.rotation" -->
+              <vl-view v-bind:min-zoom="12" v-bind:zoom="13" v-bind:max-zoom="18" v-bind:center.sync="result.center"></vl-view> <!-- v-bind:zoom.sync="map.zoom" v-bind:rotation.sync="map.rotation" -->
 
 <!--              <vl-feature v-if="!!coordinates && (coordinates.length === 2)">-->
 <!--                <vl-geom-point v-bind:coordinates="coordinates"></vl-geom-point>-->
@@ -123,6 +123,7 @@ export default {
 
       for (const index in this.results) {
         this.results[index].center = this.getCenterPoint(this.results[index])
+        this.results[index].show = true
       }
     }).then(() => {
       this.$children.forEach(collapse => collapse.toggle())
